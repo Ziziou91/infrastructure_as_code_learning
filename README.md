@@ -108,9 +108,87 @@ Pseudocode
 ## task 8 - launch app with pm2
 
 ```
-**instlal-app-play.yml**
-```yml
+As with previous scripts, it's important to build it up line-by-line, testing each tasks runs correctly before moving on to the next part. 
 
+we can SSH into the app EC2 instance to check things have run correctly, or use the following command from the ansible controller:
+```shell
+ sudo ansible web -a "git --version"
+```
+
+**install-app-play.yml**
+```yml
+# Playbook to install Sparta web server application on 'web' agent node
+---
+- hosts: web
+# see the logs while the script is running so we can see the result
+  gather_facts: yes
+# provide admin access
+  become: true
+# outline tasks
+## task 1 - update and upgrade agent node
+  tasks:
+  - name: Update and upgrade apt packages
+    apt:
+      upgrade: yes
+      update_cache: yes
+      cache_valid_time: 86400 #One day
+## task 2 - install nxginx
+  - name: Installing Nginx web server
+    apt: pkg=nginx state=present
+## task 3 - install node
+  - name: Installing Node.js
+    apt:
+      name: nodejs
+      state: present
+
+## task 4 - update and upgrade agent node
+  tasks:
+  - name: Update and upgrade apt packages
+    apt:
+      upgrade: yes
+      update_cache: yes
+      cache_valid_time: 86400 #One day
+
+## task 5 - install npm
+  - name: Installing npm
+    apt:
+      name: npm
+      state: present
+
+  - name: download latest npm + Mongoose
+    shell: |
+      npm install -g npm@latest
+      npm install mongoose@ -y
+
+## task 6 - update and upgrade agent node
+  tasks:
+  - name: Update and upgrade apt packages
+    apt:
+      upgrade: yes
+      update_cache: yes
+      cache_valid_time: 86400 #One day
+
+## task 7 - clone app
+
+  - name: clone app github repository
+    git:
+      repo: https://github.com/Ziziou91/tech258_cicd
+      dest: /tech258_cicd
+      clone: yes
+      update: yes
+## task 8 - install pm2
+  - name: install pm2
+    shell: |
+      cd /tech258_cicd/app
+      npm install -y
+      npm install pm2@4.0.0 -g
+
+## task 9 - launch app with pm2
+  - name: launch app with pm2
+    shell: |
+      cd /tech258_cicd/app
+      pm2 stop app
+      pm2 start app.js
 ```
 
 
