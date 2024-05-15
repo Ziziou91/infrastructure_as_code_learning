@@ -60,3 +60,58 @@ sudo ansible all -a "sudo apt-get update -y"
 sudo ansible all -a "ls -a"
 ```
 
+## Writing YAML
+
+Getting indentation right in YAML is important. Everything needs to be correctly blocked. Instead of using tab in VS code use double space. Example:
+
+```yml
+- block starts here
+
+  this is part of the same block as it's double spaced
+```
+
+## Installing nginx on our app server with an ansible playbook file
+
+```yml
+# creating a playbook to install/configure nginx on the web server
+---
+# YAML starts with three dashes - also allows applications to recognise steps (demarkated with ---), as well as YAML code in text files
+
+# add the name of the host web (already defined in hosts)
+- hosts: web
+# see the logs while the script is running so we can see the result
+  gather_facts: yes
+# provide admin access - sudo
+  become: true
+# add instructions to install nginx on the web server
+  tasks:
+  - name: Installing Nginx web server
+    apt: pkg=nginx state=present
+# ensure nginx is in a running state
+```
+### Installing our web server app onto our agent node
+
+Pseudocode
+```yml
+---
+# add the name of the host web (already defined in hosts)
+# see the logs while the script is running so we can see the result
+# provide admin access - sudo
+# outline tasks
+## task 1 - run update and upgrade
+## task 2 - install nxginx
+## task 3 - install node
+## task 4 - install npm
+## task 5 - install git
+## task 6 - clone app
+## task 7 - install pm2
+## task 8 - launch app with pm2
+
+```
+**instlal-app-play.yml**
+```yml
+
+```
+
+
+TODO: Create a playbook to install nodejs on the web server. Migrate the app code, install dependencies and run the app in the background. 
