@@ -1,0 +1,52 @@
+# this playbook will install mongodb in the db server
+
+---
+- hosts: db
+
+  gather_facts: yes
+
+  become: true
+
+  tasks:
+  - name: install and configure Mongodb
+    apt: pkg=mongodb state=present
+
+# deleted the default mongod.conf rm -rf /etc/mongod.conf
+  - name: delete existing mongodd.conf file
+    file:
+      path: "/etc/mongodb.conf"
+      state: absent
+
+# create mongod.conf on the db node
+  - name: copy local mongodd.conf in /home/ubuntu/environment to db node
+    copy:
+      src: /home/ubuntu/environment/mongodb.conf
+      dest: /etc/mongodb.conf
+
+
+  - name: Configure MongoDB
+    action: service name=mongodb state=started enabled=yes
+
+  - name: restart mongodb
+    shell: |
+      systemctl restart mongodb
+
+  handlers:
+    - name: restart mongodb
+      service: name=mongodb state=restarted
+
+# allow 27017 from app or 0000
+# restart mongodb
+# enable mongodb
+# create an env DB_HOST=db-ip:27017/posts tricky as the environment is the controller
+# back to the web server restart the app/npm start
+
+# Apparently there is a missing step, which one is it?
+
+
+
+
+
+
+
+

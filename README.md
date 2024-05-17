@@ -60,6 +60,10 @@ sudo ansible all -a "sudo apt-get update -y"
 sudo ansible all -a "ls -a"
 ```
 
+## Ansible playbooks
+
+### testing with ansible playbooks
+
 ## Writing YAML
 
 Getting indentation right in YAML is important. Everything needs to be correctly blocked. Instead of using tab in VS code use double space. Example:
@@ -191,5 +195,13 @@ we can SSH into the app EC2 instance to check things have run correctly, or use 
       pm2 start app.js
 ```
 
+## Setting up the database vm
 
-TODO: Create a playbook to install nodejs on the web server. Migrate the app code, install dependencies and run the app in the background. 
+TODO
+1) Create a new mongo.yml
+2) Installed the required mongo version
+3) update and upgrade
+4) allow required ports 27017 from app or 0000
+5) Ensure its in a running state - and enable
+6) Restart mongod so is launched with new config
+

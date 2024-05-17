@@ -36,13 +36,7 @@
       name: npm
       state: present
 
-  - name: download latest npm + Mongoose
-    shell: |
-      npm install -g npm@latest
-      npm install mongoose@ -y
-
 ## task 6 - update and upgrade agent node
-  tasks:
   - name: Update and upgrade apt packages
     apt:
       upgrade: yes
@@ -58,14 +52,22 @@
       dest: /tech258_cicd
       clone: yes
       update: yes
-## task 8 - install pm2
+
+## task 8 - set DB_HOST
+  - name: set DB_host
+    lineinfile:
+      path: /etc/environment
+      line: 'DB_HOST=mongodb://18.201.198.74:27017/posts'
+      create: yes
+
+## task 9 - install npm and pm2
   - name: install pm2
     shell: |
       cd /tech258_cicd/app
-      npm install -y
+      sudo -E npm install --unsafe-perm
       npm install pm2@4.0.0 -g
 
-## task 9 - launch app with pm2
+## task 10 - launch app with pm2
   - name: launch app with pm2
     shell: |
       cd /tech258_cicd/app
