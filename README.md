@@ -194,8 +194,16 @@ we can SSH into the app EC2 instance to check things have run correctly, or use 
       pm2 stop app
       pm2 start app.js
 ```
-
 ## Setting up the database vm
+
+
+## Ansible as a tool for cyber security
+
+Anisible's ability to make many changes to multiple servers make it's a powerful tool for cyber security.
+
+For example, we can create playbooks to blocks maliciious connections (ips, managing ports), or roll out updates to many virtual machines at the same time. 
+
+We can set these playbooks to run when certain criteria are met, such as they are in a certain timezone, or the sever is in a certain state.
 
 TODO
 1) Create a new mongo.yml
