@@ -15,6 +15,8 @@ The FCA has made multi-cloud a requirement for financial services organisations.
 
 ## Setting up terraform and launching an EC2 instance
 
+![Terraform diagram](./images/terraform/terraform-diagram.png)
+
 1) Download the latest version of terraform from the [official website](https://developer.hashicorp.com/terraform/install)
    ![download terraform](./images/terraform/image_1.png)
 2) Extract *terraform.exe* and move into the directory `c:/terraform`
