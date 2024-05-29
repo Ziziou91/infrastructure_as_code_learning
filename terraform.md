@@ -15,22 +15,22 @@ The FCA has made multi-cloud a requirement for financial services organisations.
 
 ## Setting up terraform and launching an EC2 instance
 
-![Terraform diagram](./images/terraform/terraform-diagram.png)
+![Terraform diagram](./images/tf/tf-diagram.png)
 
-1) Download the latest version of terraform from the [official website](https://developer.hashicorp.com/terraform/install)
-   ![download terraform](./images/terraform/image_1.png)
+1) Download the latest version of terraform from the [official website](https://developer.hashicorp.com/tf/install)
+   ![download terraform](./images/tf/image_1.png)
 2) Extract *terraform.exe* and move into the directory `c:/terraform`
-    ![install terraform](./images/terraform/image_2.png)
+    ![install terraform](./images/tf/image_2.png)
 3) Update the `PATH` environment variable include were terraform is located:
-    ![add terraform to PATH environment variable](./images/terraform/image_3.png)
+    ![add terraform to PATH environment variable](./images/tf/image_3.png)
 4) Close and reopen bash, then check the variable has been set by running `terraform -v`
 5) We need to add our AWS access key details (both ACCESS_KEY_ID and SECRET_KEY) as environment variables. Add them in the same tool we used for PATH with the following keys
 ```bash
 AWS_ACCESS_KEY_ID : ASDSADASDSADASDSA
 AWS_SECRET_KEY: ASDSADASDSADASD
 ```   
-6) We can then initialise our terraform installation with the command `terraform init`
-7) We can now start building our first terraform script (written in HCL). We'll call this `main.tf`
+1) We can then initialise our terraform installation with the command `terraform init`
+2) We can now start building our first terraform script (written in HCL). We'll call this `main.tf`
 ```hcl
 # create a service on the cloud - launch an EC2 instance on AWS
 # HCL syntax key = value
